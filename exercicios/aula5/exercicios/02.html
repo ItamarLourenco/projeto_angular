@@ -1,0 +1,77 @@
+<html ng-app="exercicio">
+<head>
+	<meta charset="utf-8" />
+	<title>Projeto - Lista Telefonica</title>
+	<link rel="stylesheet" href="../../../lib/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="../../../lib/jquery-ui/jquery-ui.min.css" />
+
+</head>
+<body ng-controller="exercicioController">
+	<div class="container">
+		<div class='jumbotron'>
+			<h3>{{ titulo }}</h3>
+			
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nome:</th>
+						<th>Telefone:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="contato in contatos | filter: busca" id="contato-{{$index}}">
+						<td>{{contato.nome}}</td>
+						<td>{{contato.telefone}}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br />
+			Deletar Contato:<br />
+			<select ng-model="contatoSelecionado" ng-options="contato.nome for contato in contatos" ng-change="deletarContato()">
+				<option value="">Selecione uma opção</option>
+			</select>
+
+		</div>		
+	</div>
+	<script type="text/javascript" src="../../../lib/angular.min.js"></script>
+	<script type="text/javascript" src="../../../lib/jquery.min.js"></script>
+	<script type="text/javascript" src="../../../lib/jquery-ui/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+		angular.module('exercicio', []);
+
+		angular.module('exercicio').controller("exercicioController", function($scope){
+			$scope.titulo = "Exercicio";
+
+			$scope.contatos = [
+				{nome: 'Pedro', telefone: "99999-9999", categoria: "Analista"},
+				{nome: 'Maria', telefone: "99999-8888", categoria: "Motorias"},
+				{nome: 'José', telefone: "99999-7777", categoria: "Advogado"},
+				{nome: 'José', telefone: "99999-7777", categoria: "Advogado"},
+				{nome: 'José', telefone: "99999-7777", categoria: "Advogado"},
+			];
+
+			$scope.deletarContato = function(s){
+				var contatoSelecionado = $scope.contatoSelecionado;
+				var index = $scope.contatos.indexOf(contatoSelecionado);
+				if(index > -1){
+					$("#contato-" + index).fadeOut(1000, function(){
+
+						$scope.contatos = $scope.contatos.filter(function(contato, index){
+							if(contatoSelecionado != contato){
+								return contato;
+							}
+						
+						});
+						$scope.$apply()
+
+					});
+				}
+			}	
+		});
+	</script>
+</body>
+</html>
+
+
+

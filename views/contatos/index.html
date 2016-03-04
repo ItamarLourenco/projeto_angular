@@ -1,0 +1,37 @@
+<h3>Lista Telefonicas</h3>
+
+<input type="text" ng-model="criterioBusca" placeholder="Buscar..." class="form-control"/>
+
+<div class="alert alert-info" ng-show="contatos.length <= 0">
+	Nenhum contato encontrado, por favor adicione um contato
+</div>
+
+<table class="table table-striped" ng-show="contatos.length > 0">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Nome:</th>
+			<th>Telefone:</th>
+			<th>Operadora</th>
+			<th>Editar</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="contato in contatos | filter: criterioBusca" ng-class="{selecionado: contato.selecionado}">
+			<td><input type="checkbox" ng-model="contato.selecionado" /></td>
+			<td><a href="#/view/{{contato.id}}">{{contato.nome}}</a></td>
+			<td><a href="#/view/{{contato.id}}">{{contato.telefone}}</a></td>
+			<td>{{ contato.operadora ? contato.operadora.nome + "(" + contato.operadora.numero + ")" : ""}}</td>
+			<td style="text-align:center"><a href="#/editar/{{contato.id}}" class="glyphicon glyphicon-pencil"></a></td>
+				
+		</tr>
+	</tbody>
+</table>
+
+<hr />
+
+<a class="btn btn-primary btn-block" href="#/adicionar">Adicionar Contato</a>
+<button class="btn btn-danger btn-block" ng-click="removerContato();" ng-if="contatoSelecionado()">Remover Contatos</button>
+
+<br />
+<a href="#/operadoras" class="btn btn-link">Gerenciar Operadoras</a>

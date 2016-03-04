@@ -1,0 +1,79 @@
+<html ng-app="exercicio">
+<head>
+	<meta charset="utf-8" />
+	<title>Projeto - Lista Telefonica</title>
+	<link rel="stylesheet" href="../../../lib/bootstrap/css/bootstrap.min.css" />
+	<style type="text/css">
+		.selecionado{
+			background: yellow !important;
+		}
+	</style>
+</head>
+<body ng-controller="exercicioController">
+	<div class="container">
+		<div class='jumbotron'>
+			<h3>{{ titulo }}</h3>
+			
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nome:</th>
+						<th>Telefone:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="contato in contatos" ng-class="{selecionado: contatoSelecionado == contato}">
+						<td>{{contato.nome}}</td>
+						<td>{{contato.telefone}}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br />
+			
+			<h2>Adicionar Contato</h2>
+			<form name="contatoForm">
+				<input class="form-control" type="text" ng-model="contato.nome" name='nome' placeholder="Nome:" ng-required="true"/>
+				<br />
+				<input class="form-control" type="text" ng-model="contato.telefone" name='telefone' placeholder="Telefone:" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/"/>
+
+				<br />
+				<div class="alert alert-danger" ng-if="contatoForm.nome.$error.required && contatoForm.nome.$dirty">
+					Por favor Digite o nome.
+				</div>
+
+				<div class="alert alert-danger"  ng-if="contatoForm.telefone.$error.required && contatoForm.telefone.$dirty">
+					Por favor Digite o telefone.
+				</div>
+
+				<div class="alert alert-info"  ng-if="contatoForm.telefone.$error.pattern">
+					Por favor, digite o seu telefone no seguinte formato 00000-0000.
+				</div>
+
+				<br />
+				<button class="btn btn-primary" ng-disabled="contatoForm.$invalid" ng-click="adicionar(contato)">Adicionar</button>
+			</form>
+		</div>		
+	</div>
+	<script type="text/javascript" src="../../../lib/angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module('exercicio', []);
+
+		angular.module('exercicio').controller("exercicioController", function($scope){
+			$scope.titulo = "Exercicio";
+
+			$scope.contatos = [
+				{nome: 'Pedro', telefone: "99999-9999", categoria: "Analista"},
+				{nome: 'Maria', telefone: "99999-8888", categoria: "Motorias"},
+				{nome: 'José', telefone: "99999-7777", categoria: "Advogado"},
+			];
+
+			$scope.adicionar = function(contato){
+				$scope.contatos.push(contato);
+				delete $scope.contato;
+				$scope.contatoForm.$setPristine();
+			}
+		});
+	</script>
+</body>
+</html>

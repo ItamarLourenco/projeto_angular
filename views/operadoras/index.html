@@ -1,0 +1,23 @@
+<h3>Operadoras</h3>
+
+<table class="table table-striped" ng-show="operadoras.length > 0">
+	<thead>
+		<tr>
+			<th>Nome:</th>
+			<th>Numero:</th>
+			<th>Categoria</th>
+			<th>Editar</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="operadora in operadoras">
+			<td><a href="#/view-operadora/{{operadora.id}}">{{operadora.nome}}</a></td>
+			<td><a href="#/view-operadora/{{operadora.id}}">{{operadora.numero}}</a></td>
+			<td>{{ operadora.categoria }}</td>				
+			<td style="text-align:center"><a href="#/editar-operadora/{{operadora.id}}" class="glyphicon glyphicon-pencil"></a></td>
+		</tr>
+	</tbody>
+</table>
+
+<a href="#/adicionar-operadora" class="btn btn-primary btn-block">Adicionar Operadora</a>
+<span ng-include="'views/includes/botoes-nav.html'"></span>

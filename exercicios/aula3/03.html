@@ -1,0 +1,29 @@
+<html ng-app="exercicio">
+<head>
+	<meta charset="utf-8" />
+	<title>Projeto - Lista Telefonica</title>
+	<link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css" />
+</head>
+<body ng-controller="exercicioController">
+	<div class="container">
+		<div class='jumbotron'>
+			<h3>{{ titulo }}</h3>
+			
+			<button ng-click="alerta()">Clique</button>
+		</div>		
+	</div>
+	<script type="text/javascript" src="../../lib/angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module('exercicio', []);
+
+		angular.module('exercicio').controller("exercicioController", function($scope){
+			$scope.titulo = "Ng ng-click";
+
+			$scope.alerta = function(){
+				alert('Clicado com a diretiva ng-click');
+			}
+		});
+	</script>
+</body>
+</html>
+

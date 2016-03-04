@@ -1,0 +1,18 @@
+<table class="table table-striped" ng-show="contatos.length > 0">
+	<tbody>
+		<tr>
+			<td>Nome:</td>
+			<td>{{contato.nome}}</td>
+		</tr>
+		<tr>
+			<td>Telefone:</td>
+			<td>{{contato.telefone}}</td>
+		</tr>
+		<tr>
+			<td>Operadora:</td>
+			<td>{{ contato.operadora.nome }}</td>
+		</tr>
+	</tbody>
+</table>
+<a href="#/editar/{{contato.id}}" class="btn btn-link">Editar</a>
+<span ng-include="'views/includes/botoes-nav.html'"></span>

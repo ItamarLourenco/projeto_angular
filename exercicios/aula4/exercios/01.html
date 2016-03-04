@@ -1,0 +1,52 @@
+<html ng-app="exercicio">
+<head>
+	<meta charset="utf-8" />
+	<title>Projeto - Lista Telefonica</title>
+	<link rel="stylesheet" href="../../../lib/bootstrap/css/bootstrap.min.css" />
+</head>
+<body ng-controller="exercicioController">
+	<div class="container">
+		<div class='jumbotron'>
+			<h3>{{ titulo }}</h3>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Nome:</th>
+						<th>Telefone:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="contato in contatos">
+						<td><input type="checkbox" ng-model="contato.selecionado" ng-click="apagar()" /></td>
+						<td>{{contato.nome}}</td>
+						<td>{{contato.telefone}}</td>
+					</tr>
+				</tbody>
+			</table>	
+
+		</div>		
+	</div>
+	<script type="text/javascript" src="../../../lib/angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module('exercicio', []);
+
+		angular.module('exercicio').controller("exercicioController", function($scope){
+			$scope.titulo = "Exercicio";
+
+			$scope.contatos = [
+				{nome:"Maria", telefone: '99999-8888'},
+				{nome:"Joao", telefone: '99999-7777'},
+				{nome:"Jose", telefone: '99999-6666'},
+			];
+
+			$scope.apagar = function(){
+				$scope.contatos = $scope.contatos.filter(function(contato){
+					if(contato.selecionado != true) return contato;
+				});
+			}
+		});
+	</script>
+</body>
+</html>
+

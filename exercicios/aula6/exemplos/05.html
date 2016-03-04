@@ -1,0 +1,54 @@
+<html ng-app="exercicio">
+<head>
+	<meta charset="utf-8" />
+	<title>Projeto - Lista Telefonica</title>
+	<link rel="stylesheet" href="../../../lib/bootstrap/css/bootstrap.min.css" />
+	<style type="text/css">
+		.selecionado{
+			background: yellow !important;
+		}
+	</style>
+</head>
+<body ng-controller="exercicioController">
+	<div class="container">
+		<div class='jumbotron'>
+			<h3>{{ titulo }}</h3>
+			
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nome:</th>
+						<th>Telefone:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="contato in contatos">
+						<td>{{contato.nome}}</td>
+						<td>{{contato.telefone}}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br />
+	</div>
+	<script type="text/javascript" src="../../../lib/angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module('exercicio', []);
+
+		angular.module('exercicio').controller("exercicioController", function($scope, $http){
+			$scope.titulo = "Exercicio";
+			$scope.contatos = [];
+			var urlContatos = 'http://172.16.35.86/listatelefonica/contatos/';
+
+			var carregarContatos = function(){
+				$http.get(urlContatos).success(function(data){
+					$scope.contatos = data;
+				});
+			}
+			carregarContatos();
+
+			
+		});
+	</script>
+</body>
+</html>

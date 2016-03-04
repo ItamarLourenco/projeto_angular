@@ -1,0 +1,42 @@
+<html ng-app="exercicio">
+<head>
+	<meta charset="utf-8" />
+	<title>Projeto - Lista Telefonica</title>
+	<link rel="stylesheet" href="../../../lib/bootstrap/css/bootstrap.min.css" />
+	<style type="text/css">
+		.jumbotron{
+			height:500px;
+		}
+	</style>
+</head>
+<body ng-controller="exercicioController">
+	<div class="container">
+		<div class='jumbotron'>
+			<h3>{{ titulo }}</h3>
+			<div class="col-sm-6">
+				<button ng-click="alerta()" class="btn btn-primary" ng-disabled="!habilitarBotao">Botão</button>
+				<input type="text" ng-disabled="!habilitarBotao" />
+			</div>
+			<div class="col-sm-6">
+				<p>
+					<label for="habilitarBotao">Habilitar Botao</label>
+					<input type="checkbox" id="habilitarBotao" ng-model="habilitarBotao" />
+				</p>
+			</div>
+		</div>		
+	</div>
+	<script type="text/javascript" src="../../../lib/angular.min.js"></script>
+	<script type="text/javascript">
+		angular.module('exercicio', []);
+
+		angular.module('exercicio').controller("exercicioController", function($scope){
+			$scope.titulo = "Exercicio";
+
+			$scope.alerta = function(){
+				alert();
+			}
+		});
+	</script>
+</body>
+</html>
+
